@@ -1,0 +1,54 @@
+{
+  "name": "@dcrgll/lint",
+  "version": "0.1.0",
+  "description": "Pinned Biome and Ultracite presets for dcrgll projects.",
+  "type": "module",
+  "exports": {
+    "./package.json": "./package.json",
+    "./core": "./biome/core.json",
+    "./react": "./biome/react.json",
+    "./next": "./biome/next.json"
+  },
+  "files": [
+    "biome/*.json",
+    "README.md"
+  ],
+  "scripts": {
+    "check": "biome check .",
+    "commit": "cz",
+    "commitlint": "commitlint --edit",
+    "format": "biome format --write .",
+    "prepare": "husky || true",
+    "release": "release-it --ci"
+  },
+  "keywords": [
+    "biome",
+    "biome-config",
+    "formatter",
+    "linter",
+    "ultracite"
+  ],
+  "author": "dcrgll",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@biomejs/biome": "2.4.15",
+    "ultracite": "7.7.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "21.0.1",
+    "@commitlint/config-conventional": "21.0.1",
+    "@release-it/conventional-changelog": "11.0.0",
+    "commitizen": "4.3.1",
+    "cz-git": "1.13.1",
+    "husky": "9.1.7",
+    "release-it": "20.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-git"
+    }
+  }
+}
