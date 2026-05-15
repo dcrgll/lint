@@ -9,7 +9,7 @@
   },
   "npm": {
     "publish": true,
-    "publishArgs": ["--access", "public", "--provenance"],
+    "publishArgs": ["--access", "public"],
     "skipChecks": true
   },
   "plugins": {

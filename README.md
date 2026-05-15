@@ -99,3 +99,5 @@ On npmjs.com, configure the package trusted publisher with:
 - Workflow filename: `release.yml`
 
 The release workflow uses GitHub OIDC, so it does not need an `NPM_TOKEN` secret and will not prompt for a one-time password.
+
+If CI fails with `ENEEDAUTH`, npm is not matching the workflow to the trusted publisher. Check that the npm package settings exactly match the repository and workflow filename above, including the `.yml` extension.
