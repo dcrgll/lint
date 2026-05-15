@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "description": "Pinned Biome and Ultracite presets for dcrgll projects.",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dcrgll/lint.git"
+  },
   "exports": {
     "./package.json": "./package.json",
     "./core": "./biome/core.json",

@@ -89,8 +89,13 @@ docs: update usage
 
 ## Publishing
 
-This package is configured for public npm publishing:
+This package is configured for public npm publishing from GitHub Actions using npm Trusted Publishing.
 
-```sh
-npm publish --access public
-```
+On npmjs.com, configure the package trusted publisher with:
+
+- Publisher: GitHub Actions
+- Organization or user: `dcrgll`
+- Repository: `lint`
+- Workflow filename: `release.yml`
+
+The release workflow uses GitHub OIDC, so it does not need an `NPM_TOKEN` secret and will not prompt for a one-time password.
