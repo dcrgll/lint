@@ -92,7 +92,7 @@ docs: update usage
 This package is configured as a two-step release:
 
 1. `release.yml` runs `release-it` on `main` to create the version commit, tag, changelog, and GitHub release.
-2. `publish.yml` runs when a `v*` tag is pushed and publishes that exact tag to npm using Trusted Publishing.
+2. `publish.yml` runs after the release workflow completes, checks out the release tag, and publishes that exact package version to npm using Trusted Publishing.
 
 On npmjs.com, configure the package trusted publisher with:
 
@@ -104,3 +104,5 @@ On npmjs.com, configure the package trusted publisher with:
 The release workflow uses GitHub OIDC, so it does not need an `NPM_TOKEN` secret and will not prompt for a one-time password.
 
 If CI fails with `ENEEDAUTH`, npm is not matching the workflow to the trusted publisher. Check that the npm package settings exactly match the repository and workflow filename above, including the `.yml` extension.
+
+If a release exists but was not published, run the `Publish` workflow manually and provide the release tag, for example `v0.2.0`.

@@ -1,9 +1,16 @@
 name: Publish
 
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_run:
+    workflows:
+      - Release
+    types:
+      - completed
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Tag to publish, for example v0.2.0"
+        required: true
 
 permissions:
   contents: read
@@ -11,11 +18,14 @@ permissions:
 
 jobs:
   publish:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v6
@@ -27,8 +37,41 @@ jobs:
       - name: Update npm
         run: npm install -g npm@latest
 
+      - name: Checkout release tag
+        id: tag
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            tag="${{ inputs.tag }}"
+          else
+            tag="$(git tag --sort=-version:refname | head -n 1)"
+          fi
+
+          if [ -z "$tag" ]; then
+            echo "No release tag found" >&2
+            exit 1
+          fi
+
+          git checkout "$tag"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+
       - name: Install dependencies
         run: npm ci
 
+      - name: Check package version
+        id: package
+        run: |
+          package="$(node -p "require('./package.json').name")"
+          version="$(node -p "require('./package.json').version")"
+
+          echo "name=$package" >> "$GITHUB_OUTPUT"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+          if npm view "$package@$version" version >/dev/null 2>&1; then
+            echo "published=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Publish
+        if: steps.package.outputs.published == 'false'
         run: npm publish --access public
