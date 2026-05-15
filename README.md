@@ -79,7 +79,7 @@ Use the guided commit prompt:
 npm run commit
 ```
 
-Commit messages and PR titles must use the same format:
+Commit messages should use the same format:
 
 ```text
 feat: add next preset

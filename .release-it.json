@@ -9,7 +9,8 @@
   },
   "npm": {
     "publish": true,
-    "publishArgs": ["--access", "public", "--provenance"]
+    "publishArgs": ["--access", "public", "--provenance"],
+    "skipChecks": true
   },
   "plugins": {
     "@release-it/conventional-changelog": {
