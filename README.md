@@ -89,14 +89,17 @@ docs: update usage
 
 ## Publishing
 
-This package is configured for public npm publishing from GitHub Actions using npm Trusted Publishing.
+This package is configured as a two-step release:
+
+1. `release.yml` runs `release-it` on `main` to create the version commit, tag, changelog, and GitHub release.
+2. `publish.yml` runs when a `v*` tag is pushed and publishes that exact tag to npm using Trusted Publishing.
 
 On npmjs.com, configure the package trusted publisher with:
 
 - Publisher: GitHub Actions
 - Organization or user: `dcrgll`
 - Repository: `lint`
-- Workflow filename: `release.yml`
+- Workflow filename: `publish.yml`
 
 The release workflow uses GitHub OIDC, so it does not need an `NPM_TOKEN` secret and will not prompt for a one-time password.
 
