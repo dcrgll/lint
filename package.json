@@ -38,8 +38,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@biomejs/biome": "2.5.12",
-    "ultracite": "7.10.8"
+    "@biomejs/biome": "2.5.13",
+    "ultracite": "7.11.1"
   },
   "devDependencies": {
     "@commitlint/cli": "21.2.2",
