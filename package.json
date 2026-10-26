@@ -38,12 +38,12 @@
     "access": "public"
   },
   "dependencies": {
-    "@biomejs/biome": "2.5.15",
-    "ultracite": "8.0.1"
+    "@biomejs/biome": "2.6.2",
+    "ultracite": "8.0.2"
   },
   "devDependencies": {
-    "@commitlint/cli": "21.2.3",
-    "@commitlint/config-conventional": "21.2.3",
+    "@commitlint/cli": "21.2.4",
+    "@commitlint/config-conventional": "21.2.4",
     "@release-it/conventional-changelog": "12.0.2",
     "commitizen": "4.3.2",
     "cz-git": "1.14.0",
